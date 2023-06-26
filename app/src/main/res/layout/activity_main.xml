@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/home_background"
+    tools:context=".MainActivity">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+
+        <ImageView
+            android:id="@+id/imageCategory"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:src="@drawable/ic_pop_corn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/textCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="Popcorn Time"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/imageCategory"
+            app:layout_constraintStart_toEndOf="@id/imageCategory"
+            app:layout_constraintTop_toTopOf="@id/imageCategory" />
+
+        <ImageView
+            android:id="@+id/search_icon"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_search"
+            app:tint="@color/white" />
+
+
+        <ImageView
+            android:id="@+id/fav_icon"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/search_icon"
+            app:layout_constraintEnd_toStartOf="@+id/search_icon"
+            app:layout_constraintTop_toTopOf="@+id/search_icon"
+            app:srcCompat="@drawable/wishlist"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/now_playing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:text="Trending Now"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textCategory" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/movie_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_205sdp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/_75sdp"
+            android:paddingEnd="@dimen/_75sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/now_playing">
+
+        </androidx.viewpager2.widget.ViewPager2>
+
+        <ProgressBar
+            android:id="@+id/trend_progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/red"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/upcoming"
+            app:layout_constraintEnd_toEndOf="@+id/movie_view_pager"
+            app:layout_constraintStart_toStartOf="@+id/movie_view_pager"
+            app:layout_constraintTop_toBottomOf="@+id/now_playing" />
+
+
+        <TextView
+            android:id="@+id/upcoming"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="16dp"
+            android:text="Upcoming"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movie_view_pager" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/upcoming_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/upcoming"
+            tools:listitem="@layout/movie_list_item">
+
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+        <ProgressBar
+            android:id="@+id/upcoming_progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/red"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/upcoming_recycler_view"
+            app:layout_constraintEnd_toEndOf="@+id/upcoming_recycler_view"
+            app:layout_constraintStart_toStartOf="@+id/upcoming_recycler_view"
+            app:layout_constraintTop_toTopOf="@+id/upcoming_recycler_view" />
+
+        <TextView
+            android:id="@+id/top_rated_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="16dp"
+            android:text="Top Rated"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/upcoming_recycler_view" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/top_rated_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="21dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_rated_text_view"
+            app:layout_constraintVertical_bias="1.0"
+            tools:listitem="@layout/movie_list_item"/>
+
+
+        <ProgressBar
+            android:id="@+id/top_rated_progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/red"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/top_rated_recycler_view"
+            app:layout_constraintEnd_toEndOf="@+id/top_rated_recycler_view"
+            app:layout_constraintStart_toStartOf="@+id/top_rated_recycler_view"
+            app:layout_constraintTop_toTopOf="@+id/top_rated_recycler_view" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
