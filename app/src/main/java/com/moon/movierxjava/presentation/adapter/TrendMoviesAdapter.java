@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.moon.movierxjava.R;
 import com.moon.movierxjava.data.model.Movie;
+import com.moon.movierxjava.databinding.MovieTrendListItemBinding;
 import com.moon.movierxjava.utils.Constants;
 
 import java.util.List;
@@ -32,18 +33,16 @@ public class TrendMoviesAdapter extends RecyclerView.Adapter<TrendMoviesAdapter.
     @NonNull
     @Override
     public MovieListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View MovieView = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_trend_list_item, parent, false);
-        return new MovieListViewHolder(MovieView , onMovieClickListener);
+
+
+        MovieTrendListItemBinding view = MovieTrendListItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new MovieListViewHolder(view, onMovieClickListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MovieListViewHolder holder, int position) {
 
-        Movie movie = mMovies.get(position);
-
-        Glide.with(context)
-                .load(Constants.IMAGE_URL + movie.getPosterPath())
-                .into(holder.MovieImage);
+        holder.bindItem(mMovies.get(position));
     }
 
     @Override
@@ -54,14 +53,20 @@ public class TrendMoviesAdapter extends RecyclerView.Adapter<TrendMoviesAdapter.
     public class MovieListViewHolder extends RecyclerView.ViewHolder{
         ImageView MovieImage;
         OnMovieClickListener onMovieClickListener;
-        public MovieListViewHolder(@NonNull View itemView, OnMovieClickListener onMovieClickListener) {
-            super(itemView);
-            MovieImage = itemView.findViewById(R.id.trend_image_view);
+        public MovieListViewHolder(@NonNull MovieTrendListItemBinding view, OnMovieClickListener onMovieClickListener) {
+            super(view.getRoot());
+            MovieImage = view.trendImageView;
             this.onMovieClickListener = onMovieClickListener;
 
             itemView.setOnClickListener(v -> {
                 onMovieClickListener.onMovieClicked(mMovies.get(getAdapterPosition()));
             });
+        }
+
+        public void bindItem(Movie movie) {
+            Glide.with(context)
+                    .load(Constants.IMAGE_URL + movie.getPosterPath())
+                    .into(MovieImage);
         }
     }
 }
